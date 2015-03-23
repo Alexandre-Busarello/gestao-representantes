@@ -6,16 +6,8 @@ import org.hibernate.criterion.Restrictions;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-
 import application.modelo.ItemTabelaPreco;
-import application.modelo.Representada;
 import application.modelo.TabelaPreco;
-import application.util.CampoFiltro;
-
 public class TabelaPrecoDao extends DaoGenerico<TabelaPreco> {
 	
 	public TabelaPrecoDao() {

@@ -11,14 +11,11 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import application.controle.dao.DaoGenerico;
 import application.controle.negocio.SelecionarRegistroItem;
-import application.controle.negocio.SelecionarRegistroNegocio;
-import application.modelo.Cliente;
 
 @SuppressWarnings("rawtypes")
 public class SelecionarRegistroControle {
 	
 	private ObservableList<SelecionarRegistroItem> dados;
-	private SelecionarRegistroNegocio selecionarRegistroNegocio = new SelecionarRegistroNegocio();
 	private Class classe;
 	
     @FXML

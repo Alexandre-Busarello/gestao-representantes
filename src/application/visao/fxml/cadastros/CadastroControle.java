@@ -46,9 +46,6 @@ public class CadastroControle {
 	// Produtos mais vendidos
 	private Button btApuracaoComissoes; 
 	
-	
-	private Button btSelecionado = new  Button(); //setBotaoSelecionadoGerais(btManterEmpresa);
-	
 	private TelasCadastros telasCadastros;
 	
 	public void setTelasCadastros(TelasCadastros telasCadastros) {
@@ -56,9 +53,6 @@ public class CadastroControle {
 	}
 	
 	public void setBotaoSelecionadoGerais(Button bt) {
-		//btSelecionado.setStyle("-fx-background-color: #E3E3E3;-fx-border-color: #939393");
-		btSelecionado = bt;
-		//btSelecionado.setStyle("-fx-background-color: #A3A3A3;-fx-border-color: #737373");	
 	}
 	
 	// Gerais

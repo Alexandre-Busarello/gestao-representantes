@@ -115,7 +115,6 @@ public class DaoGenerico<T> {
 	}	
 	
 	// Retorna uma lista com os dados após aplicado o filtro em uma tela de manter cadastros
-	@SuppressWarnings("rawtypes")
 	public List<?> filtrarDadosManter(CampoFiltro campoFiltro, String valor) throws ParseException {
 		Criteria criteria = getSession().createCriteria(campoFiltro.getEntidade());
 		Class<?> classe = campoFiltro.getTipoCampo();
