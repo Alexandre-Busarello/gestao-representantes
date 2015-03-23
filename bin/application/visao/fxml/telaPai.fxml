@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane id="fundo" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1020.0" stylesheets="@../../application.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.visao.fxml.TelaPaiControle">
+   <top>
+      <BorderPane id="topo" prefHeight="97.0" prefWidth="800.0" styleClass="main-panel" BorderPane.alignment="CENTER">
+         <bottom>
+            <MenuButton fx:id="menuButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="25.0" prefWidth="800.0" style="-fx-border-width: 1 0 1 0;" text="MenuButton" BorderPane.alignment="CENTER">
+              <items>
+                <MenuItem fx:id="menuItemCadastros" mnemonicParsing="false" onAction="#selecionouMenuItemCadastros" text="Gestão de cadastros" />
+                <MenuItem fx:id="menuItemVendas" mnemonicParsing="false" onAction="#selecionouMenuItemVendas" text="Gestão de vendas" />
+              </items>
+            </MenuButton>
+         </bottom>
+      </BorderPane>
+   </top>
+</BorderPane>

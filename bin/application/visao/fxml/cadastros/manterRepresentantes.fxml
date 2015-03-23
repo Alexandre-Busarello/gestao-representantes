@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane centerShape="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="453.0" prefWidth="598.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.visao.fxml.cadastros.ManterRepresentantesControle">
+   <top>
+      <Pane prefHeight="46.0" prefWidth="598.0" BorderPane.alignment="CENTER">
+         <children>
+            <ComboBox fx:id="filtroCombo" layoutX="66.0" layoutY="11.0" prefHeight="25.0" prefWidth="124.0" />
+            <TextField fx:id="filtroValor" layoutX="193.0" layoutY="11.0" prefHeight="25.0" prefWidth="207.0" />
+            <Label layoutX="20.0" layoutY="15.0" text="Filtro" />
+            <Button layoutX="400.0" layoutY="11.0" mnemonicParsing="false" onAction="#pressionouFiltrar" prefHeight="25.0" prefWidth="29.0" text="Filtrar" />
+            <Button fx:id="btIncluir" layoutX="507.0" layoutY="11.0" mnemonicParsing="false" onAction="#pressionouIncluir" prefHeight="25.0" prefWidth="77.0" text="Incluir" />
+         </children>
+      </Pane>
+   </top>   
+   <center>
+      <TableView fx:id="tabela" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+        <columns>
+          <TableColumn fx:id="razaoSocialColuna" minWidth="0.0" prefWidth="212.0" text="Nome" />
+            <TableColumn fx:id="cnpjColuna" prefWidth="130.0" text="Documento" />
+          <TableColumn fx:id="cidadeColuna" prefWidth="106.0" text="Cidade" />
+            <TableColumn fx:id="estadoColuna" prefWidth="57.0" text="Estado" />
+            <TableColumn fx:id="acoesColuna" prefWidth="91.0" text="Ações" />
+        </columns>
+      </TableView>
+   </center>
+</BorderPane>

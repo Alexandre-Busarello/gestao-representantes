@@ -1,0 +1,30 @@
+#001 – Fazer todos os cadastros possíveis como está no PHN, com exceção de vias de transporte.
+#002 – Relatório – Clientes.
+#003 – Definir quais relatórios são necessários.
+#004 – Importar dados da tabela de preços do PHN.
+#005 – Verificar quais relatórios gráficos precisam ser feitos.
+#006 – Possibilitar preenchimento de informações do CNPJ com base no site da receita.
+#007 – Realizar o backup da base de dados automaticamente.
+#008 – Relatório de visitas para diversas datas. Sendo um cliente por linha. Por ordem alfabética de cidade.
+#009 – No cadastro do cliente, ter opção de informar o representante que atende o mesmo.
+#010 – No cadastro de cliente, não permitir efetuar o cadastro sem que todos os dados sejam devidamente preenchidos.
+#011 – Relatório de clientes que não compraram nada no período informado.
+#012 – Desenvolver relatório de vendas.
+#013 – Possibilitar recalcular o pedido.
+#014 – Estatística de vendas, otimizar os relatórios existentes. 
+#015 – Adicionar campo ao pedido para informar qual o número do pedido na fabrica, também a opção de colocar de que forma e quando ele foi pra
+fábrica. (EX.: web 10.12.14 14:47h)
+#016 – Ter a opção de procurar um pedido digitando somente o seu NR. Independente de fábrica ou cliente. 
+#017 - Organizar os pacotes e estrutura dos fontes, retirar o que não é necessário.
+#018 - Estipular prazos de desenvolvimento. "Prá não cair a peteca!"
+#019 - 
+#020 -
+#021 -
+#022 -
+#023 -
+#024 -
+#025 -
+#026 -
+#027 -
+#028 -
+#029 -  
