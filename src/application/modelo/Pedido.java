@@ -1,10 +1,15 @@
 package application.modelo;
 
+import java.math.BigInteger;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,13 +18,16 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
+import application.enumeradores.StatusPedido;
+
 @Entity
-@Table(name = "pedido", uniqueConstraints = { @UniqueConstraint(columnNames = "id") })
+@Table(name = "pedidos", uniqueConstraints = { @UniqueConstraint(columnNames = "id") })
 public class Pedido {
 
 	@Id
@@ -27,34 +35,49 @@ public class Pedido {
 	@Column(name = "id", unique = true, nullable = false)
 	private int id;
 
+	@Column(name="numeropedido", unique = true, nullable = false)
+	private int numeroPedido;	
+	
 	@ManyToOne
 	@JoinColumn(name = "representada", unique = false, nullable = false)
 	@Fetch(FetchMode.SELECT)
-	private Representada representada;
+	private Representada representada;	
 
-	@Column(name = "codigoproduto", length = 25, unique = true, nullable = false)
-	private String codigoProduto;
+	@ManyToOne
+	@JoinColumn(name = "cliente", unique = false, nullable = false)
+	@Fetch(FetchMode.SELECT)
+	private Cliente cliente;
 
-	@Column(name = "descricao", length = 80, unique = false, nullable = false)
-	private String descricao;
+	@Column(name = "dataemissao", unique = false, nullable = true)
+	private Date dataEmissao;
 
-	@Column(name = "complemento", length = 60, unique = false, nullable = true)
-	private String complemento;
+	@OneToMany(mappedBy = "pedido", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private List<ItemPedido> itensPedido = new ArrayList<ItemPedido>();
+	
+	@ManyToOne
+	@JoinColumn(name = "tabelapreco", unique = false, nullable = false)
+	@Fetch(FetchMode.SELECT)
+	private TabelaPreco tabelaPreco;	
+	
+	/*
+	@ManyToOne
+	@JoinColumn(name = "vendedor", unique = false, nullable = false)
+	@Fetch(FetchMode.SELECT)
+	private Vendedor vendedor;		
 
-	@Column(name = "peripi", unique = false, nullable = true)
-	private double percentualIpi;
-
-	@Column(name = "percomissaorep", unique = false, nullable = true)
-	private double percentualComissaoRep;
-
-	@Column(name = "percomissaovend", unique = false, nullable = true)
-	private double percentualComissaoVend;
-
-	@Column(name = "ativo", unique = false, nullable = false)
-	private boolean ativo;
-
-	@OneToMany(mappedBy = "produto", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	private List<ItemTabelaPreco> itensTabelaPreco;
+	@ManyToOne
+	@JoinColumn(name = "usuario", unique = false, nullable = false)
+	@Fetch(FetchMode.SELECT)
+	private Usuario usuario;		
+	*/
+	@Transient
+	private Vendedor vendedor;
+	@Transient
+	private Usuario usuario;	
+	
+	@Column(name = "status", unique = false, nullable = true)
+	@Enumerated(EnumType.STRING)
+	private StatusPedido status;
 
 	public int getId() {
 		return id;
@@ -72,59 +95,69 @@ public class Pedido {
 		this.representada = representada;
 	}
 
-	public String getCodigoProduto() {
-		return codigoProduto;
+	public Cliente getCliente() {
+		return cliente;
 	}
 
-	public void setCodigoProduto(String codigoProduto) {
-		this.codigoProduto = codigoProduto;
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
 	}
 
-	public String getDescricao() {
-		return descricao;
+	public Date getDataEmissao() {
+		return dataEmissao;
 	}
 
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
+	public void setDataEmissao(Date dataEmissao) {
+		this.dataEmissao = dataEmissao;
 	}
 
-	public String getComplemento() {
-		return complemento;
+	public List<ItemPedido> getItensPedido() {
+		return itensPedido;
 	}
 
-	public void setComplemento(String complemento) {
-		this.complemento = complemento;
+	public void setItensPedido(List<ItemPedido> itensPedido) {
+		this.itensPedido = itensPedido;
 	}
 
-	public double getPercentualIpi() {
-		return percentualIpi;
+	public TabelaPreco getTabelaPreco() {
+		return tabelaPreco;
 	}
 
-	public void setPercentualIpi(double percentualIpi) {
-		this.percentualIpi = percentualIpi;
+	public void setTabelaPreco(TabelaPreco tabelaPreco) {
+		this.tabelaPreco = tabelaPreco;
 	}
 
-	public double getPercentualComissaoRep() {
-		return percentualComissaoRep;
+	public Vendedor getVendedor() {
+		return vendedor;
 	}
 
-	public void setPercentualComissaoRep(double percentualComissaoRep) {
-		this.percentualComissaoRep = percentualComissaoRep;
+	public void setVendedor(Vendedor vendedor) {
+		this.vendedor = vendedor;
 	}
 
-	public double getPercentualComissaoVend() {
-		return percentualComissaoVend;
+	public Usuario getUsuario() {
+		return usuario;
 	}
 
-	public void setPercentualComissaoVend(double percentualComissaoVend) {
-		this.percentualComissaoVend = percentualComissaoVend;
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 
-	public boolean isAtivo() {
-		return ativo;
+	public StatusPedido getStatus() {
+		return status;
 	}
 
-	public void setAtivo(boolean ativo) {
-		this.ativo = ativo;
+	public void setStatus(StatusPedido status) {
+		this.status = status;
+	}			
+
+
+	public int getNumeroPedido() {
+		return numeroPedido;
 	}
+
+	public void setNumeroPedido(int numeroPedido) {
+		this.numeroPedido = numeroPedido;
+	}
+	
 }

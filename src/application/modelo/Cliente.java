@@ -18,6 +18,8 @@ import javax.persistence.UniqueConstraint;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
+import application.interfaces.ISelecionavel;
+
 @Entity
 @Table(name = "clientes", uniqueConstraints = {
 		@UniqueConstraint(columnNames = "id")
@@ -27,6 +29,9 @@ public class Cliente {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id", unique = true, nullable = false)
 	private int id;		
+	
+	@Column(name="codigocliente", length=25, unique = true, nullable = false)
+	private String codigoCliente;		
 	
 	@ManyToOne
 	@JoinColumn(name="representada", nullable = false)
