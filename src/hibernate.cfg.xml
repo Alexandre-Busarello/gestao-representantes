@@ -13,7 +13,6 @@
 		<property name="hibernate.format_sql">false</property>
 		<property name="hbm2ddl.auto">update</property>
 		
-		<!-- Livro -->
 		<mapping class="application.modelo.Representante" />
 		<mapping class="application.modelo.Representada" />
 		<mapping class="application.modelo.Cliente" />
@@ -21,5 +20,8 @@
 		<mapping class="application.modelo.Produto" />
 		<mapping class="application.modelo.TabelaPreco" />
 		<mapping class="application.modelo.ItemTabelaPreco" />
+		<mapping class="application.modelo.Pedido" />
+		<mapping class="application.modelo.ItemPedido" />
+		<mapping class="application.modelo.Numero" />
 	</session-factory>
 </hibernate-configuration>

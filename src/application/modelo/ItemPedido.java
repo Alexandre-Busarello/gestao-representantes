@@ -1,6 +1,5 @@
 package application.modelo;
 
-import java.math.BigInteger;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -51,9 +50,42 @@ public class ItemPedido {
 	@Column(name="percomissaovend", unique = false, nullable = false)
 	private double percentualComissaoVend;	
 	
+	@Column(name = "valorbruto", unique = false, nullable = false)	
+	private double valorBruto;		
+	
 	@Column(name = "valorfinal", unique = false, nullable = false)	
 	private double valorFinal;	
 	
+	@Column(name = "baseipi", unique = false, nullable = false)	
+	private double baseIpi;
+	
+	@Column(name = "valoripi", unique = false, nullable = false)	
+	private double valorIpi;		
+	
+	public double getValorBruto() {
+		return valorBruto;
+	}
+
+	public void setValorBruto(double valorBruto) {
+		this.valorBruto = valorBruto;
+	}
+
+	public double getBaseIpi() {
+		return baseIpi;
+	}
+
+	public void setBaseIpi(double baseIpi) {
+		this.baseIpi = baseIpi;
+	}
+
+	public double getValorIpi() {
+		return valorIpi;
+	}
+
+	public void setValorIpi(double valorIpi) {
+		this.valorIpi = valorIpi;
+	}
+
 	public int getId() {
 		return id;
 	}

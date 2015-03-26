@@ -1,7 +1,9 @@
 package application.controle.negocio;
 
+import application.controle.dao.DaoGenerico;
 import application.controle.dao.ItemPedidoDao;
 import application.controle.dao.ProdutoDao;
+import application.enumeradores.StatusPedido;
 import application.modelo.ItemPedido;
 import application.modelo.Pedido;
 import application.modelo.Produto;
@@ -16,6 +18,11 @@ public class ItemPedidoNegocio {
 	}
 	
 	public ItemPedidoNegocio(PedidoNegocio pedidoNegocio) {
+		if (pedidoNegocio.getPedido().getStatus() != StatusPedido.ABERTO) {
+			//TODO - o pedido ja esta fechado e não pode mais receber itens
+		}
+				
+		
 		itemPedido = new ItemPedido();
 		this.pedidoNegocio = pedidoNegocio;
 		itemPedido.setPedido(pedidoNegocio.getPedido());
@@ -28,10 +35,18 @@ public class ItemPedidoNegocio {
 	
 	private void persistir() {
 		ItemPedidoDao dao = new ItemPedidoDao();
-		if (itemPedido.getId() < 1) {
-			dao.inserir(itemPedido);	
+		if (DaoGenerico.getSession().getTransaction().isInitiator()) {
+			if (itemPedido.getId() < 1) {
+				dao.inserir(itemPedido);	
+			} else {
+				dao.atualizar(itemPedido);
+			}
 		} else {
-			dao.atualizar(itemPedido);
+			if (itemPedido.getId() < 1) {
+				dao.inserirTransacionado(itemPedido);	
+			} else {
+				dao.atualizarTransacionado(itemPedido);
+			}
 		}
 	}
 	
@@ -58,7 +73,7 @@ public class ItemPedidoNegocio {
 		itemPedido.setValorFinal(itemPedido.getValorUnitario() * itemPedido.getQuantidadePedida());
 	}
 	
-	protected void finalizarItem() {
+	public void finalizarItem() {
 		persistir();
 	}
 	

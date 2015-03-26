@@ -2,6 +2,14 @@ package application;
 	
 
 
+import application.controle.dao.ClienteDao;
+import application.controle.dao.DaoGenerico;
+import application.controle.dao.ProdutoDao;
+import application.controle.negocio.ItemPedidoNegocio;
+import application.controle.negocio.PedidoNegocio;
+import application.modelo.Cliente;
+import application.modelo.Representada;
+import application.modelo.TabelaPreco;
 import application.visao.fxml.TelaPaiControle;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -59,6 +67,17 @@ public class Main extends Application {
     }
 	
 	public static void main(String[] args) {  		
+		//PedidoNegocio pedidoNegocio = new PedidoNegocio(true);
+		//pedidoNegocio.setCliente(new ClienteDao().obter(1));
+		//pedidoNegocio.setRepresentada(new DaoGenerico<Representada>(Representada.class).obter(1));
+		//pedidoNegocio.setTabelaPreco(new DaoGenerico<TabelaPreco>(TabelaPreco.class).obter(1));
+		//pedidoNegocio.finalizarDigitacao();
+		//ItemPedidoNegocio item = new ItemPedidoNegocio(PedidoNegocio.ObterPedidoNegocio(18));
+		//item.setProduto(new ProdutoDao().obter(1));
+		//item.setQuantidadePedida(7);
+		//item.setUnidadeMedida("UN");
+		//item.calcularItem();
+		//item.finalizarItem();
 		launch(args);
 	}
 }

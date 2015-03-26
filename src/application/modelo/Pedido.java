@@ -59,6 +59,28 @@ public class Pedido {
 	@Fetch(FetchMode.SELECT)
 	private TabelaPreco tabelaPreco;	
 	
+	@Column(name = "valorbruto", unique = false, nullable = false)	
+	private double valorBruto;	
+	
+	@Column(name = "valorfinal", unique = false, nullable = false)	
+	private double valorFinal;		
+	
+	public double getValorBruto() {
+		return valorBruto;
+	}
+
+	public void setValorBruto(double valorBruto) {
+		this.valorBruto = valorBruto;
+	}
+
+	public double getValorFinal() {
+		return valorFinal;
+	}
+
+	public void setValorFinal(double valorFinal) {
+		this.valorFinal = valorFinal;
+	}
+
 	/*
 	@ManyToOne
 	@JoinColumn(name = "vendedor", unique = false, nullable = false)
