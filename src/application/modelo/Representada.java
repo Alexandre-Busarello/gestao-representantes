@@ -101,16 +101,7 @@ public class Representada {
 		return numero;
 	}
 
-	public void setNumero(String numero) throws Exception {		
-    	int numeroInt = -1;
-		if (!numero.isEmpty()) {
-    		try {
-    			numeroInt = Integer.parseInt(numero);
-    		} catch (Exception e) {
-    			throw new Exception("O número informado não é válido.");
-    		}
-		}
-		
+	public void setNumero(int numeroInt) throws Exception {		
 		this.numero = numeroInt;
 	}
 
@@ -141,10 +132,6 @@ public class Representada {
 	}
 
 	public void setNome(String nome) throws Exception {
-    	if (nome.isEmpty()) {
-    		throw new Exception("O campo nome é obrigatório para o cadastro de representantes.");
-    	}
-    	
 		this.nome = nome;
 	}
 
@@ -184,17 +171,8 @@ public class Representada {
 		return cep;
 	}
 
-	public void setCep(String cep) throws Exception {
-		int cepInt = -1;
-		if (!cep.isEmpty()) {
-			try {
-				cepInt = Integer.parseInt(cep);
-			} catch (Exception e) {
-				throw new Exception("O cep informado não é válido.");
-			}
-		}	
-		
-		this.cep = cepInt;
+	public void setCep(int cep) throws Exception {
+		this.cep = cep;
 	}
 
 	public String getPais() {

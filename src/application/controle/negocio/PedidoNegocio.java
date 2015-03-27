@@ -31,7 +31,7 @@ public class PedidoNegocio {
 		}
 	}
 	
-	public PedidoNegocio(Pedido pedido) {
+	protected PedidoNegocio(Pedido pedido) {
 		this.pedido = pedido;
 	}
 	
