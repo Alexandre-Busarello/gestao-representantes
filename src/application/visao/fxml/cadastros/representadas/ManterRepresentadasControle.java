@@ -1,6 +1,7 @@
 package application.visao.fxml.cadastros.representadas;
 
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.controlsfx.control.action.Action;
@@ -22,6 +23,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import application.TelasCadastros;
 import application.controle.dao.DaoGenerico;
+import application.controle.negocio.RepresentadaNegocio;
 import application.enumeradores.FiltroRepresentadasEnum;
 import application.modelo.Representada;
 import application.util.CampoFiltro;
@@ -31,17 +33,17 @@ import application.visao.fxml.cadastros.ManterCadastroControle;
 @SuppressWarnings("deprecation")
 public class ManterRepresentadasControle extends ManterCadastroControle {
     @FXML
-    private TableView<Representada> tabela;
+    private TableView<RepresentadaNegocio> tabela;
     @FXML
-    private TableColumn<Representada, String> cnpjColuna;
+    private TableColumn<RepresentadaNegocio, String> cnpjColuna;
     @FXML
-    private TableColumn<Representada, String> nomeColuna;
+    private TableColumn<RepresentadaNegocio, String> nomeColuna;
     @FXML
-    private TableColumn<Representada, String> cidadeColuna;
+    private TableColumn<RepresentadaNegocio, String> cidadeColuna;
     @FXML
-    private TableColumn<Representada, String> estadoColuna;
+    private TableColumn<RepresentadaNegocio, String> estadoColuna;
     @FXML
-    private TableColumn<Representada, String> acoesColuna;    
+    private TableColumn<RepresentadaNegocio, String> acoesColuna;    
     
     @FXML
     private TextField filtroValor;
@@ -51,7 +53,7 @@ public class ManterRepresentadasControle extends ManterCadastroControle {
     @FXML
     private Button btIncluir;    
     
-    private ObservableList<Representada> representadasDados = FXCollections.observableArrayList();
+    private ObservableList<RepresentadaNegocio> representadasDados = FXCollections.observableArrayList();
     
     public void setTelasCadastros(TelasCadastros telasCadastros) {
     	this.telasCadastros = telasCadastros;
@@ -60,9 +62,8 @@ public class ManterRepresentadasControle extends ManterCadastroControle {
 
     @FXML
     protected void initialize() {
-    	DaoGenerico<Representada> dao = new DaoGenerico<Representada>(Representada.class);    	
-		List<?> representadas = (List<?>) dao.getLista("Representada", "");
-		representadas.forEach(r -> representadasDados.add((Representada) r));
+		List<RepresentadaNegocio> representadas = RepresentadaNegocio.ObterRepresentadaNegocioLista();
+		representadas.forEach(r -> representadasDados.add((RepresentadaNegocio) r));
 
     	tabela.setItems(representadasDados);
         // Inicializa a tabela de pessoa com duas colunas.
@@ -89,9 +90,9 @@ public class ManterRepresentadasControle extends ManterCadastroControle {
 				// Através do HBox obtem o TableCell em que o HBox esta
 				TableCell<?, ?> tblCell = (TableCell<?, ?>) hb.getParent();
 				// Com o tablecell em mão conseguimos obter o index do representante configurado para a linha do botão
-				Representada representada = tabela.getItems().get(tblCell.getIndex());
+				RepresentadaNegocio representadaNegocio = tabela.getItems().get(tblCell.getIndex());
 				// Com o representante da linha do botão alterar clicado, passamos este para a função que ira exibir a tela para fazer as alterações
-				telasCadastros.exibeIncluirRepresentadas(representada);
+				telasCadastros.exibeIncluirRepresentadas(representadaNegocio);
 			} 
 		};
     }
@@ -121,11 +122,10 @@ public class ManterRepresentadasControle extends ManterCadastroControle {
 				// Através do HBox obtem o TableCell em que o HBox esta
 				TableCell<?, ?> tblCell = (TableCell<?, ?>) hb.getParent();
 				// Com o tablecell em mão conseguimos obter o index do representante configurado para a linha do botão
-				Representada representada = tabela.getItems().get(tblCell.getIndex());				
+				RepresentadaNegocio representada = tabela.getItems().get(tblCell.getIndex());				
 			
 				// Efetua a exclusão na base de dados
-				DaoGenerico<Representada> dao = new DaoGenerico<Representada>(Representada.class);
-				dao.deletarTransacionado(representada);
+				representada.excluir();
 				
 				// Com o tablecell em mão conseguimos obter o index do representante configurado para a linha do botão		
 				tabela.getItems().remove(tblCell.getIndex());
@@ -177,11 +177,10 @@ public class ManterRepresentadasControle extends ManterCadastroControle {
 			campoFiltro.setAlias("");	
 			break;			
 		}
-    	
-	    DaoGenerico<Representada> dao = new DaoGenerico<Representada>(Representada.class);    		
-		List<?> representantes = null;
+    			
+    	List<RepresentadaNegocio> representadas = new ArrayList<RepresentadaNegocio>();
 		try {
-			representantes = (List<?>) dao.filtrarDadosManter(campoFiltro, filtroValor);
+			representadas = RepresentadaNegocio.ObterRepresentadaNegocioLista(campoFiltro, filtroValor);
 		} catch (ParseException e) {
 			Dialogs.create()
 			.owner(telasCadastros.getStage())
@@ -191,7 +190,7 @@ public class ManterRepresentadasControle extends ManterCadastroControle {
 			.showError(); 
 			e.printStackTrace();
 		}
-	    representantes.forEach(r -> representadasDados.add((Representada) r));
+		representadas.forEach(r -> representadasDados.add((RepresentadaNegocio) r));
 
     	tabela.setItems(representadasDados);
     }

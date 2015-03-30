@@ -78,7 +78,7 @@ public class Representada {
 		// Construtor padrão para o HIBERNATE
 	}
 	
-    public Representada(String cnpj, String nome, String cidade, String estado, String endereco, String numero, String bairro, String pais) throws Exception {	    	
+    public Representada(String cnpj, String nome, String cidade, String estado, String endereco, int numero, String bairro, String pais) throws Exception {	    	
     	setNome(nome);
         setCidade(cidade);
         setEstado(estado);        

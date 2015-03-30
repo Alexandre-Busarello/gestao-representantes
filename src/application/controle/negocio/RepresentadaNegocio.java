@@ -1,26 +1,28 @@
 package application.controle.negocio;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
 import application.controle.dao.RepresentadaDao;
 import application.modelo.Representada;
+import application.util.CampoFiltro;
 
 
 public class RepresentadaNegocio {
 
 	private Representada representada;
+	private final static RepresentadaDao dao = new RepresentadaDao();
 	
 	public RepresentadaNegocio() {
 		representada = new Representada();
 	}
 	
 	public RepresentadaNegocio(Representada representada) {
-		this.representada = new Representada();
+		this.representada = representada;
 	}
 
 	public static RepresentadaNegocio ObterRepresentadaNegocio(int idRep) {
-		RepresentadaDao dao = new RepresentadaDao();
 		RepresentadaNegocio representadaNegocio = new RepresentadaNegocio(dao.obter(idRep));
 		return representadaNegocio;
 	}
@@ -37,7 +39,6 @@ public class RepresentadaNegocio {
     }	
 	
 	public static List<RepresentadaNegocio> ObterRepresentadaNegocioLista() {
-		RepresentadaDao dao = new RepresentadaDao();
 		List<Representada> lista = dao.getLista();
 		List<RepresentadaNegocio> retorno = new ArrayList<RepresentadaNegocio>();
 		for (Representada representada : lista) {
@@ -46,6 +47,27 @@ public class RepresentadaNegocio {
 		return retorno;
 	}	
 	
+	@SuppressWarnings("unchecked")
+	public static List<RepresentadaNegocio> ObterRepresentadaNegocioLista(CampoFiltro filtro, String valor) throws ParseException {
+		List<Representada> lista = (List<Representada>) dao.filtrarDadosManter(filtro, valor);
+		List<RepresentadaNegocio> retorno = new ArrayList<RepresentadaNegocio>();
+		for (Representada representada : lista) {
+			retorno.add(ObterRepresentadaNegocio(representada.getId()));
+		}
+		return retorno;
+	}		
+	
+	public void gravar() {
+    	if (this.getId() > 0) {
+    		dao.atualizarTransacionado(representada);
+    	} else {
+    		dao.inserirTransacionado(representada);
+    	}		
+	}
+	
+	public void excluir() {
+		dao.deletarTransacionado(representada);
+	}	
  
     public String getEndereco() {
 		return this.representada.getEndereco();

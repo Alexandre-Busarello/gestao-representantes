@@ -5,6 +5,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Accordion;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import application.controle.negocio.RepresentadaNegocio;
 import application.modelo.Cliente;
 import application.modelo.Produto;
 import application.modelo.Representada;
@@ -128,7 +129,7 @@ public class TelasCadastros {
         }    	
     }    
     
-    public void exibeIncluirRepresentadas(Representada rep) {
+    public void exibeIncluirRepresentadas(RepresentadaNegocio rep) {
         try {
 	        FXMLLoader loader = new FXMLLoader();
 	        loader.setLocation(IncluirRepresentadasControle.class.getResource("incluirRepresentadas.fxml"));

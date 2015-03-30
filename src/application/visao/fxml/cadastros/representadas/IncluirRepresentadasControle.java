@@ -9,14 +9,13 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import application.TelasCadastros;
-import application.controle.dao.DaoGenerico;
-import application.modelo.Representada;
+import application.controle.negocio.RepresentadaNegocio;
 import application.util.JavaFxMask;
 
 @SuppressWarnings("deprecation")
 public class IncluirRepresentadasControle {
 
-	private Representada representada = null;
+	private RepresentadaNegocio representadaNegocio = null;
 	
     @FXML
     private Label lblTitulo;
@@ -28,7 +27,7 @@ public class IncluirRepresentadasControle {
     @FXML
     private TextField endereco;
     @FXML
-    private TextField numero;    
+    private TextField numero;     
     @FXML
     private TextField bairro;
     @FXML
@@ -71,24 +70,24 @@ public class IncluirRepresentadasControle {
     	estado.setText("");
     	pais.setText("");
     	telefone.setText("");
-    	JavaFxMask.addMask(telefone, "(  )    -     ");
+    	//JavaFxMask.addMask(telefone, "(  )    -     ");
     	//telefone.setMask("NNNNNNNNNNN");
     	//telefone.textProperty().addListener(new InputMaskChecker(InputMaskChecker.TELEFONE, telefone));
     	fax.setText("");
-    	JavaFxMask.addMask(fax, "(  )    -     ");
+    	//JavaFxMask.addMask(fax, "(  )    -     ");
     	//fax.setMask("NNNNNNNNNNN");
     	celular.setText("");
-    	JavaFxMask.addMask(celular, "(  )    -     ");
+    	//JavaFxMask.addMask(celular, "(  )    -     ");
     	//celular.setMask("NNNNNNNNNNN");
     	cnpj.setText("");
-    	JavaFxMask.addMask(cnpj, "  .   .   /    -  ");
+    	//JavaFxMask.addMask(cnpj, "  .   .   /    -  ");
     	email.setText("");
     	cep.setText("");
     	
     	lblTitulo.setText("Incluir representada");
     }
     
-    public void setRepresentada(Representada representada) {
+    public void setRepresentada(RepresentadaNegocio representada) {
     	nome.setText(representada.getNome());
     	nomeAbreviado.setText(representada.getNomeAbreviado());
     	endereco.setText(representada.getEndereco());
@@ -104,21 +103,21 @@ public class IncluirRepresentadasControle {
     	email.setText(representada.getEmail());
     	cep.setText((representada.getCep() != -1) ? representada.getCep()+"" : "");
     	
-    	this.representada = representada;
+    	this.representadaNegocio = representada;
     }
     
     public void pressionouFinalizar() {
-    	Representada novoRep = null;
-    	if (representada != null) {
-    		novoRep = representada;
+    	RepresentadaNegocio novaRepresentada = null;
+    	if (representadaNegocio != null) {
+    		novaRepresentada = representadaNegocio;
     	} else {
 			try {
-				novoRep = new Representada();
+				novaRepresentada = new RepresentadaNegocio();
 			} catch (Exception e) {
 				Dialogs.create()
 		        .owner(telasCadastros.getStage())
 		        .title("Erro")
-		        .masthead("Ocorreu um erro ao tentar inserir o representante.")
+		        .masthead("Ocorreu um erro ao tentar inserir a representada.")
 		        .message(e.getMessage())
 		        .showError();
 				return;
@@ -127,20 +126,23 @@ public class IncluirRepresentadasControle {
 		
     	// Atribui dados opcionais
     	try {   		
-    		novoRep.setNome(nome.getText());
-	    	novoRep.setNomeAbreviado(nomeAbreviado.getText());
-	    	novoRep.setEndereco(endereco.getText());
-	    	novoRep.setNumero(numero.getText());
-	    	novoRep.setBairro(bairro.getText());
-	    	novoRep.setCidade(cidade.getText());
-	    	novoRep.setEstado(estado.getText());
-	    	novoRep.setPais(pais.getText());
-	    	novoRep.setTelefone(JavaFxMask.stripMask(telefone.getText(), "(~~)~~~~-~~~~~"));
-	    	novoRep.setFax(JavaFxMask.stripMask(fax.getText(), "(~~)~~~~-~~~~~"));
-	    	novoRep.setCelular(JavaFxMask.stripMask(celular.getText(), "(~~)~~~~-~~~~~"));
-	    	novoRep.setCnpj(cnpj.getText());
-	    	novoRep.setEmail(email.getText());
-			novoRep.setCep(cep.getText());
+    		novaRepresentada.setNome(nome.getText());
+	    	novaRepresentada.setNomeAbreviado(nomeAbreviado.getText());
+	    	novaRepresentada.setEndereco(endereco.getText());
+	    	novaRepresentada.setNumero(numero.getText());
+	    	novaRepresentada.setBairro(bairro.getText());
+	    	novaRepresentada.setCidade(cidade.getText());
+	    	novaRepresentada.setEstado(estado.getText());
+	    	novaRepresentada.setPais(pais.getText());
+	    	//novaRepresentada.setTelefone(JavaFxMask.stripMask(telefone.getText(), "(~~)~~~~-~~~~~"));
+	    	//novaRepresentada.setFax(JavaFxMask.stripMask(fax.getText(), "(~~)~~~~-~~~~~"));
+	    	//novaRepresentada.setCelular(JavaFxMask.stripMask(celular.getText(), "(~~)~~~~-~~~~~"));
+	    	novaRepresentada.setTelefone(telefone.getText());
+	    	novaRepresentada.setFax(fax.getText());
+	    	novaRepresentada.setCelular(celular.getText());	    	
+	    	novaRepresentada.setCnpj(cnpj.getText());
+	    	novaRepresentada.setEmail(email.getText());
+			novaRepresentada.setCep(cep.getText());
 		} catch (Exception e) {
 			Dialogs.create()
 	        .owner(telasCadastros.getStage())
@@ -151,13 +153,7 @@ public class IncluirRepresentadasControle {
 			return;
 		}
     	
-    	DaoGenerico<Representada> dao = new DaoGenerico<Representada>(Representada.class);
-
-    	if (representada != null) {
-    		dao.atualizarTransacionado(novoRep);
-    	} else {
-    		dao.inserirTransacionado(novoRep);
-    	}
+    	novaRepresentada.gravar();
     	
     	telasCadastros.exibeManterRepresentadas();
     }
